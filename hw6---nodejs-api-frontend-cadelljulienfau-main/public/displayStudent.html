@@ -1,0 +1,61 @@
+<!-- filename: getstudent.html -->
+<!DOCTYPE html>
+<html>
+<head>
+<title>Get Student</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=chrome">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a class="navbar-brand" href="#">Student Registry</a></li>
+      <li  class="active"><a href="index.html">Home</a><br><br></li>
+      <li><a href="addStudent.html">Add</a><br><br></li>
+      <li><a href="updateStudent.html">Update</a><br><br></li>
+      <li><a href="displayStudent.html">View</a><br><br></li>
+      <li><a href="deleteStudent.html">Delete</a><br><br></li>
+      <li><a href="listStudents.html">List</a></li>
+    </ul> </div></nav>
+
+
+</head>
+<body>
+
+  <label for="record">Student Record ID:</label>
+  <input type="text" id="record" name="record"><br><br>
+
+  <button onclick="getstudent()">View Student</button>
+  <br>
+  <br>
+  <div id="mydiv" name="mydiv"></div>
+  <script>
+
+    function getstudent() {
+      var record_val = $("#record").val();
+      $.ajax({
+        url: "http://localhost:5678/students/"+record_val,
+        type: "get",
+        success: function(response) {
+          $("#mydiv").text(response);
+        },
+        error: function(xhr) {
+          $("#mydiv").text('error: ' + xhr);
+          console.log(xhr)
+        }
+      });
+    }
+
+
+
+    
+    
+  </script>
+
+</body>
+</html>
